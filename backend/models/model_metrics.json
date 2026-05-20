@@ -1,0 +1,49 @@
+{
+  "xgboost_yield": {
+    "rmse": 544.81,
+    "mae": 302.68,
+    "r2": 0.9897,
+    "per_crop_rmse": {
+      "Groundnut": 6122.5,
+      "Cotton": 7769.1,
+      "Rice": 5066.2,
+      "Wheat": 5412.9,
+      "Soybean": 5135.1,
+      "Maize": 5754.5,
+      "Mustard": 6019.1,
+      "Sugarcane": 5338.3,
+      "Potato": 15686.4,
+      "Barley": 5677.8
+    }
+  },
+  "rf_crop_classifier": {
+    "accuracy": 70.25,
+    "cv_mean": 72.66
+  },
+  "feature_columns": [
+    "nitrogen",
+    "phosphorus",
+    "potassium",
+    "ph",
+    "temperature",
+    "rainfall",
+    "humidity",
+    "npk_sum",
+    "npk_ratio_nk",
+    "ph_deviation",
+    "rain_temp_ratio"
+  ],
+  "crops": [
+    "Barley",
+    "Cotton",
+    "Groundnut",
+    "Maize",
+    "Mustard",
+    "Potato",
+    "Rice",
+    "Soybean",
+    "Sugarcane",
+    "Wheat"
+  ],
+  "n_training_samples": 10000
+}

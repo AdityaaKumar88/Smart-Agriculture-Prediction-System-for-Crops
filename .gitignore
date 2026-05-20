@@ -1,0 +1,25 @@
+# Node
+node_modules/
+dist/
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.env
+backend/.env
+venv/
+env/
+.venv/
+
+# Machine Learning Models (large files)
+backend/models/*.pkl
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
