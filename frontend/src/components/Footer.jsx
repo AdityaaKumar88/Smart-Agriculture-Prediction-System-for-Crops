@@ -12,7 +12,7 @@ export default function Footer() {
   const year = new Date().getFullYear();
   return (
     <footer id="contact" className="relative border-t" style={{ borderColor: 'rgba(0,255,136,0.08)', background: 'rgba(0,10,4,0.98)' }}>
-      <div className="max-w-7xl mx-auto px-6 py-16">
+      <div className="w-full max-w-[1400px] mx-auto px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-14">
           {/* Brand column */}
           <div className="lg:col-span-2">
@@ -27,14 +27,7 @@ export default function Footer() {
                 <div className="text-xs text-gray-600">Smart Farming Platform</div>
               </div>
             </div>
-            <p className="text-gray-400 text-sm leading-relaxed mb-6 max-w-xs">
-              India's most advanced AI-powered precision agriculture platform. Empowering 3,000+ farmers with real-time insights, predictive analytics, and intelligent crop advisory.
-            </p>
-            <div className="flex flex-col gap-2 text-sm text-gray-500 mb-6">
-              <div className="flex items-center gap-2.5"><FiMapPin size={14} className="text-[#00ff88]" /> New Delhi, India — Serving all 28 States</div>
-              <div className="flex items-center gap-2.5"><FiMail size={14} className="text-[#00ff88]" /> contact@precisionagri.ai</div>
-              <div className="flex items-center gap-2.5"><FiPhone size={14} className="text-[#00ff88]" /> +91 98765 43210</div>
-            </div>
+          
             <div className="flex gap-3">
               {[
                 { icon: <FiGithub />, href: '#', label: 'GitHub' },

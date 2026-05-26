@@ -61,7 +61,7 @@ export default function Features() {
       />
       <hr className="neon-divider mb-0" />
 
-      <div className="max-w-7xl mx-auto px-6 pt-24">
+      <div className="w-full max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12 pt-24 flex flex-col items-center">
         {/* Section header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -91,7 +91,7 @@ export default function Features() {
           variants={containerVariants}
           initial="hidden"
           animate={inView ? 'show' : 'hidden'}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full"
         >
           {features.map(({ icon, title, description, badge, gradient }, i) => (
             <motion.div

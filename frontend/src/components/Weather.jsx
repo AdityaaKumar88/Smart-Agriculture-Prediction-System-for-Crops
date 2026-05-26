@@ -1,9 +1,23 @@
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { WiDaySunny, WiRain, WiCloudy, WiDayCloudyGusts, WiThunderstorm, WiDayCloudy } from 'react-icons/wi';
-import { FiCloud, FiDroplet, FiWind, FiSun, FiThermometer } from 'react-icons/fi';
+import { FiCloud, FiDroplet, FiWind, FiSun, FiThermometer, FiMapPin } from 'react-icons/fi';
 import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
+import axios from 'axios';
 import { mockWeatherData } from '../utils/mockData';
+
+const STATES = [
+  { name: 'Punjab', lat: 31.1471, lon: 75.3412 },
+  { name: 'Haryana', lat: 29.0588, lon: 76.0856 },
+  { name: 'Uttar Pradesh', lat: 26.8467, lon: 80.9462 },
+  { name: 'Maharashtra', lat: 19.7515, lon: 75.7139 },
+  { name: 'Gujarat', lat: 22.2587, lon: 71.1924 },
+  { name: 'Rajasthan', lat: 27.0238, lon: 74.2179 },
+  { name: 'Madhya Pradesh', lat: 22.9734, lon: 78.6569 },
+  { name: 'Karnataka', lat: 15.3173, lon: 75.7139 },
+  { name: 'Tamil Nadu', lat: 11.1271, lon: 78.6569 },
+  { name: 'Kerala', lat: 10.8505, lon: 76.2711 },
+];
 
 const conditionIcon = (condition, size = 40) => {
   const icons = {
@@ -20,8 +34,58 @@ const conditionIcon = (condition, size = 40) => {
 export default function Weather() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-80px' });
+  const [selectedState, setSelectedState] = useState(STATES[0]);
+  const [weatherData, setWeatherData] = useState(mockWeatherData);
 
-  const tempData = mockWeatherData.forecast.map(d => ({ day: d.day, high: d.high, low: d.low, rain: d.rain }));
+  useEffect(() => {
+    const fetchWeather = async () => {
+      try {
+        const { lat, lon, name } = selectedState;
+        const res = await axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,wind_speed_10m,precipitation,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=auto`);
+        
+        const data = res.data;
+        const current = data.current;
+        const daily = data.daily;
+        
+        const mapCode = (code) => {
+            if (code <= 3) return "Sunny";
+            if (code <= 48) return "Cloudy";
+            if (code <= 67 || code === 77 || code === 80 || code === 81 || code === 82) return "Rainy";
+            if (code >= 95) return "Thunderstorm";
+            return "Partly Cloudy";
+        };
+
+        const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+        const forecast = daily.time.slice(0, 7).map((time, i) => {
+           const date = new Date(time);
+           return {
+             day: days[date.getDay()],
+             high: Math.round(daily.temperature_2m_max[i]),
+             low: Math.round(daily.temperature_2m_min[i]),
+             condition: mapCode(daily.weather_code[i]),
+             rain: daily.precipitation_probability_max[i] || 0
+           };
+        });
+
+        setWeatherData({
+          location: `${name}, India`,
+          temperature: Math.round(current.temperature_2m),
+          humidity: Math.round(current.relative_humidity_2m),
+          rainfall: current.precipitation,
+          windSpeed: Math.round(current.wind_speed_10m),
+          condition: mapCode(current.weather_code),
+          uvIndex: 8,
+          forecast: forecast
+        });
+      } catch (err) {
+        console.error("Failed to fetch weather", err);
+      }
+    };
+    fetchWeather();
+  }, [selectedState]);
+
+  const tempData = weatherData.forecast.map(d => ({ day: d.day, high: d.high, low: d.low, rain: d.rain }));
 
   return (
     <section id="weather" className="relative py-24 overflow-hidden" ref={ref}>
@@ -31,7 +95,7 @@ export default function Weather() {
         style={{ background: 'radial-gradient(ellipse 50% 40% at 70% 30%, rgba(0,180,90,0.04) 0%, transparent 70%)' }}
       />
 
-      <div className="max-w-7xl mx-auto px-6 pt-16">
+      <div className="w-full max-w-[1400px] mx-auto px-6 pt-16">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -49,6 +113,24 @@ export default function Weather() {
           <p className="text-gray-400 max-w-xl mx-auto">
             Hyperlocal 7-day weather forecasts integrated with your field data for precision farming decisions.
           </p>
+
+          <div className="mt-8 flex justify-center">
+            <div className="glass px-4 py-2 rounded-xl flex items-center gap-3 border border-[rgba(0,255,136,0.2)]">
+              <FiMapPin className="text-[#00ff88]" />
+              <select
+                className="bg-transparent text-white outline-none cursor-pointer"
+                value={selectedState.name}
+                onChange={(e) => {
+                  const s = STATES.find((x) => x.name === e.target.value);
+                  if (s) setSelectedState(s);
+                }}
+              >
+                {STATES.map((s) => (
+                  <option key={s.name} value={s.name} className="bg-gray-900 text-white">{s.name}</option>
+                ))}
+              </select>
+            </div>
+          </div>
         </motion.div>
 
         {/* Main weather card */}
@@ -65,24 +147,24 @@ export default function Weather() {
                 animate={{ y: [0, -8, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
               >
-                {conditionIcon(mockWeatherData.condition, 80)}
+                {conditionIcon(weatherData.condition, 80)}
               </motion.div>
               <div>
                 <div className="text-6xl font-black text-white" style={{ fontFamily: 'Poppins,sans-serif' }}>
-                  {mockWeatherData.temperature}°
+                  {weatherData.temperature}°
                   <span className="text-2xl text-gray-400 font-normal">C</span>
                 </div>
-                <div className="text-[#00ff88] font-semibold text-lg">{mockWeatherData.condition}</div>
-                <div className="text-gray-400 text-sm mt-1">📍 {mockWeatherData.location}</div>
+                <div className="text-[#00ff88] font-semibold text-lg">{weatherData.condition}</div>
+                <div className="text-gray-400 text-sm mt-1">📍 {weatherData.location}</div>
               </div>
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
               {[
-                { icon: <FiDroplet />, label: 'Humidity', value: `${mockWeatherData.humidity}%`, color: '#4da6ff' },
-                { icon: <WiRain size={18} />, label: 'Rainfall', value: `${mockWeatherData.rainfall}mm`, color: '#00d46a' },
-                { icon: <FiWind />, label: 'Wind', value: `${mockWeatherData.windSpeed} km/h`, color: '#00ff88' },
-                { icon: <FiSun />, label: 'UV Index', value: mockWeatherData.uvIndex, color: '#ffcc00' },
+                { icon: <FiDroplet />, label: 'Humidity', value: `${weatherData.humidity}%`, color: '#4da6ff' },
+                { icon: <WiRain size={18} />, label: 'Rainfall', value: `${weatherData.rainfall}mm`, color: '#00d46a' },
+                { icon: <FiWind />, label: 'Wind', value: `${weatherData.windSpeed} km/h`, color: '#00ff88' },
+                { icon: <FiSun />, label: 'UV Index', value: weatherData.uvIndex, color: '#ffcc00' },
               ].map(({ icon, label, value, color }) => (
                 <div key={label} className="weather-card text-center px-4 py-3 min-w-[90px]">
                   <div style={{ color }} className="text-xl flex justify-center mb-1">{icon}</div>
@@ -105,7 +187,7 @@ export default function Weather() {
           >
             <h3 className="text-base font-bold text-white mb-5">7-Day Forecast</h3>
             <div className="flex flex-col gap-3">
-              {mockWeatherData.forecast.map((day, i) => (
+              {weatherData.forecast.map((day, i) => (
                 <motion.div
                   key={day.day}
                   initial={{ opacity: 0, x: -20 }}

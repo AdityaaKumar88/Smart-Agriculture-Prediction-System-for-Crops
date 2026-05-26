@@ -61,7 +61,7 @@ export default function Analytics() {
         style={{ background: 'radial-gradient(ellipse 60% 50% at 50% 100%, rgba(0,255,136,0.04) 0%, transparent 70%)' }}
       />
 
-      <div className="max-w-7xl mx-auto px-6 pt-16">
+      <div className="w-full max-w-[1400px] mx-auto px-6 pt-16">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}

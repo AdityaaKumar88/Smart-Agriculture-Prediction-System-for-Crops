@@ -105,16 +105,7 @@ export default function Hero() {
 
       {/* Main content */}
       <div className="relative z-10 text-center max-w-5xl mx-auto px-6 py-24 pt-32">
-        {/* Badge */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="section-label mx-auto mb-8"
-        >
-          <span className="w-2 h-2 rounded-full bg-[#00ff88] animate-pulse inline-block" />
-          AI-Powered Agriculture Platform • India's First
-        </motion.div>
+
 
         {/* Heading */}
         <motion.h1
@@ -138,7 +129,7 @@ export default function Hero() {
           transition={{ duration: 0.7, delay: 0.3 }}
           className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed"
         >
-          Harness the power of <span className="text-[#00ff88] font-semibold">XGBoost AI</span>, real-time soil analytics, 
+          Harness the power of <span className="text-[#00ff88] font-semibold">XGBoost AI</span>, real-time soil analytics,
           and precision weather forecasting to maximize your crop yield and transform Indian agriculture.
         </motion.p>
 

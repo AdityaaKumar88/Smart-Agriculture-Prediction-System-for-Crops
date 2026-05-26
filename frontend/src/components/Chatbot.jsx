@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiSend, FiMessageSquare, FiX, FiMic } from 'react-icons/fi';
+import { FiSend, FiX, FiMic } from 'react-icons/fi';
+import { BsRobot } from 'react-icons/bs';
 import { GiWheat } from 'react-icons/gi';
 import { aiChatResponses } from '../utils/mockData';
 
@@ -121,7 +122,7 @@ export default function Chatbot() {
                 <FiX size={22} style={{ color: '#00ff88' }} />
               </motion.span>
             : <motion.span key="chat" initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }} transition={{ duration: 0.2 }}>
-                <FiMessageSquare size={22} className="text-black" />
+                <BsRobot size={22} className="text-black" />
               </motion.span>
           }
         </AnimatePresence>

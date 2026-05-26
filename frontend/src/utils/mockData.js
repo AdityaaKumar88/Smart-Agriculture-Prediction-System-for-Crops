@@ -1,20 +1,20 @@
 // Mock data for the entire application
 export const mockWeatherData = {
   location: "Punjab, India",
-  temperature: 28,
-  humidity: 65,
-  rainfall: 12,
-  windSpeed: 14,
-  condition: "Partly Cloudy",
-  uvIndex: 7,
+  temperature: 42,
+  humidity: 25,
+  rainfall: 0,
+  windSpeed: 12,
+  condition: "Sunny",
+  uvIndex: 9,
   forecast: [
-    { day: "Mon", high: 30, low: 22, condition: "Sunny", rain: 0 },
-    { day: "Tue", high: 28, low: 20, condition: "Cloudy", rain: 20 },
-    { day: "Wed", high: 25, low: 18, condition: "Rainy", rain: 85 },
-    { day: "Thu", high: 27, low: 21, condition: "Partly Cloudy", rain: 30 },
-    { day: "Fri", high: 31, low: 23, condition: "Sunny", rain: 5 },
-    { day: "Sat", high: 32, low: 24, condition: "Sunny", rain: 0 },
-    { day: "Sun", high: 29, low: 22, condition: "Cloudy", rain: 15 },
+    { day: "Mon", high: 43, low: 29, condition: "Sunny", rain: 0 },
+    { day: "Tue", high: 44, low: 30, condition: "Sunny", rain: 0 },
+    { day: "Wed", high: 42, low: 28, condition: "Sunny", rain: 0 },
+    { day: "Thu", high: 41, low: 27, condition: "Partly Cloudy", rain: 10 },
+    { day: "Fri", high: 43, low: 29, condition: "Sunny", rain: 0 },
+    { day: "Sat", high: 45, low: 31, condition: "Sunny", rain: 0 },
+    { day: "Sun", high: 44, low: 30, condition: "Sunny", rain: 0 },
   ],
 };
 

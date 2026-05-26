@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  FiMenu, FiX, FiHome, FiGrid, FiBarChart2, FiDroplet, 
+import {
+  FiMenu, FiX, FiHome, FiGrid, FiBarChart2, FiDroplet,
   FiCloud, FiMessageSquare, FiMap, FiActivity, FiPhone
 } from 'react-icons/fi';
 import { GiWheat } from 'react-icons/gi';
@@ -14,7 +14,6 @@ const navLinks = [
   { label: 'Weather', href: '#weather', icon: <FiCloud /> },
   { label: 'AI Assistant', href: '#chatbot', icon: <FiMessageSquare /> },
   { label: 'Analytics', href: '#analytics', icon: <FiActivity /> },
-  { label: 'Contact', href: '#contact', icon: <FiPhone /> },
 ];
 
 export default function Navbar() {
@@ -50,11 +49,10 @@ export default function Navbar() {
         initial={{ y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled ? 'navbar-blur shadow-lg' : 'bg-transparent'
-        }`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'navbar-blur shadow-lg' : 'bg-transparent'
+          }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <motion.div
@@ -62,26 +60,25 @@ export default function Navbar() {
               onClick={() => handleNav('#home')}
               whileHover={{ scale: 1.04 }}
             >
-              <div className="relative w-9 h-9 flex items-center justify-center rounded-lg bg-gradient-to-br from-green-500 to-emerald-700" style={{boxShadow:'0 0 16px rgba(0,255,136,0.4)'}}>
+              <div className="relative w-9 h-9 flex items-center justify-center rounded-lg bg-gradient-to-br from-green-500 to-emerald-700" style={{ boxShadow: '0 0 16px rgba(0,255,136,0.4)' }}>
                 <GiWheat className="text-black text-xl" />
               </div>
-              <span className="font-bold text-lg" style={{fontFamily:'Poppins,sans-serif'}}>
+              <span className="font-bold text-lg" style={{ fontFamily: 'Poppins,sans-serif' }}>
                 <span className="neon-text">Precision</span>
                 <span className="text-white"> Agri.AI</span>
               </span>
             </motion.div>
 
             {/* Desktop Links */}
-            <div className="hidden lg:flex items-center gap-1">
+            <div className="hidden lg:flex items-center gap-6">
               {navLinks.map((link) => (
                 <button
                   key={link.label}
                   onClick={() => handleNav(link.href)}
-                  className={`relative px-3 py-2 text-sm font-medium rounded-lg transition-all duration-300 flex items-center gap-1.5 ${
-                    activeSection === link.href.replace('#', '')
-                      ? 'text-[#00ff88]'
-                      : 'text-gray-400 hover:text-white'
-                  }`}
+                  className={`relative px-3 py-2 text-sm font-medium rounded-lg transition-all duration-300 flex items-center gap-1.5 ${activeSection === link.href.replace('#', '')
+                    ? 'text-[#00ff88]'
+                    : 'text-gray-400 hover:text-white'
+                    }`}
                 >
                   {link.label}
                   {activeSection === link.href.replace('#', '') && (
@@ -130,11 +127,10 @@ export default function Navbar() {
                 <button
                   key={link.label}
                   onClick={() => handleNav(link.href)}
-                  className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${
-                    activeSection === link.href.replace('#', '')
-                      ? 'bg-[rgba(0,255,136,0.1)] text-[#00ff88]'
-                      : 'text-gray-400 hover:text-white hover:bg-white/5'
-                  }`}
+                  className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${activeSection === link.href.replace('#', '')
+                    ? 'bg-[rgba(0,255,136,0.1)] text-[#00ff88]'
+                    : 'text-gray-400 hover:text-white hover:bg-white/5'
+                    }`}
                 >
                   <span className="text-base">{link.icon}</span>
                   {link.label}
