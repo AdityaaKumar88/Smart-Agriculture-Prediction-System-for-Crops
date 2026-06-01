@@ -45,8 +45,8 @@ const containerVariants = {
 };
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 50 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+  hidden: (i) => ({ opacity: 0, x: i % 2 === 0 ? -100 : 100 }),
+  show: { opacity: 1, x: 0, transition: { duration: 0.6, ease: 'easeOut' } },
 };
 
 export default function Features() {
@@ -80,10 +80,7 @@ export default function Features() {
             Everything You Need to{' '}
             <span className="gradient-text">Farm Smarter</span>
           </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Our AI-powered platform combines satellite imagery, IoT sensors, and machine learning
-            to give farmers actionable insights at their fingertips.
-          </p>
+
         </motion.div>
 
         {/* Feature Cards */}
@@ -96,6 +93,7 @@ export default function Features() {
           {features.map(({ icon, title, description, badge, gradient }, i) => (
             <motion.div
               key={title}
+              custom={i}
               variants={cardVariants}
               className={`feature-card glass p-6 cursor-pointer`}
               style={{ border: '1px solid rgba(0,255,136,0.12)' }}

@@ -108,19 +108,34 @@ export default function Hero() {
 
 
         {/* Heading */}
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.1 }}
-          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-tight tracking-tight mb-6"
+        <h1
+          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-tight tracking-tight mb-6 overflow-hidden"
           style={{ fontFamily: 'Poppins, sans-serif' }}
         >
-          Smart Farming
-          <br />
-          <span className="gradient-text">for a Better</span>
-          <br />
-          <span className="text-white">Future</span>
-        </motion.h1>
+          <motion.div
+            initial={{ opacity: 0, x: -100 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.1, ease: 'easeOut' }}
+          >
+            Smart Farming
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: 100 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.3, ease: 'easeOut' }}
+            className="gradient-text"
+          >
+            for a Better
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: -100 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.5, ease: 'easeOut' }}
+            className="text-white"
+          >
+            Future
+          </motion.div>
+        </h1>
 
         {/* Subheading */}
         <motion.p

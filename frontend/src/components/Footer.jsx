@@ -2,20 +2,16 @@ import { motion } from 'framer-motion';
 import { GiWheat } from 'react-icons/gi';
 import { FiGithub, FiTwitter, FiLinkedin, FiMail, FiPhone, FiMapPin } from 'react-icons/fi';
 
-const footerLinks = {
-  Product: ['Crop Prediction', 'Soil Analysis', 'Weather Forecast', 'AI Assistant', 'Analytics'],
-  Technology: ['XGBoost ML', 'LangChain AI', 'FastAPI Backend', 'React Frontend', 'Streamlit Admin'],
-  Resources: ['Documentation', 'API Reference', 'Dataset Sources', 'Research Papers', 'Changelog'],
-};
+
 
 export default function Footer() {
   const year = new Date().getFullYear();
   return (
     <footer id="contact" className="relative border-t" style={{ borderColor: 'rgba(0,255,136,0.08)', background: 'rgba(0,10,4,0.98)' }}>
       <div className="w-full max-w-[1400px] mx-auto px-6 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-14">
+        <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-10 mb-14">
           {/* Brand column */}
-          <div className="lg:col-span-2">
+          <div>
             <div className="flex items-center gap-2.5 mb-5">
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-green-500 to-emerald-700 flex items-center justify-center" style={{ boxShadow: '0 0 16px rgba(0,255,136,0.4)' }}>
                 <GiWheat className="text-black text-xl" />
@@ -48,21 +44,7 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Link columns */}
-          {Object.entries(footerLinks).map(([section, links]) => (
-            <div key={section}>
-              <h4 className="text-sm font-bold text-white mb-4 uppercase tracking-wider">{section}</h4>
-              <ul className="flex flex-col gap-2.5">
-                {links.map((link) => (
-                  <li key={link}>
-                    <a href="#" className="text-sm text-gray-500 hover:text-[#00ff88] transition-colors duration-200">
-                      {link}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+
         </div>
 
         <hr className="neon-divider mb-8" />
